@@ -1,6 +1,5 @@
 from jsonrpcserver import method, serve, Success, Error
 
-# Banco de dados em memória para carros (usando lista)
 car_db = []
 car_id_counter = [1]
 
