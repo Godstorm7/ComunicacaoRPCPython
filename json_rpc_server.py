@@ -4,7 +4,7 @@ car_db = []
 car_id_counter = [1]
 
 @method
-def create_car(marca, modelo, ano):
+def createCar(marca, modelo, ano):
     _id = car_id_counter[0]
     carro = {"id": _id, "marca": marca, "modelo": modelo, "ano": ano}
     car_db.append(carro)
@@ -12,14 +12,14 @@ def create_car(marca, modelo, ano):
     return Success(carro)
 
 @method
-def read_car(_id):
+def readCar(_id):
     for carro in car_db:
         if carro["id"] == _id:
             return Success(carro)
     return Error("Carro não encontrado")
 
 @method
-def update_car(_id, marca=None, modelo=None, ano=None):
+def updateCar(_id, marca=None, modelo=None, ano=None):
     for carro in car_db:
         if carro["id"] == _id:
             if marca is not None:
@@ -32,7 +32,7 @@ def update_car(_id, marca=None, modelo=None, ano=None):
     return Error("Carro não encontrado")
 
 @method
-def delete_car(_id):
+def deleteCar(_id):
     for i, carro in enumerate(car_db):
         if carro["id"] == _id:
             del car_db[i]
@@ -40,7 +40,7 @@ def delete_car(_id):
     return Error("Carro não encontrado")
 
 @method
-def list_cars():
+def listCars():
     return Success(car_db)
 
 serve('localhost', 5000)

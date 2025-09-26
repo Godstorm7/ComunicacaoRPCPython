@@ -10,7 +10,7 @@ def menu():
     print("0. Sair")
     return input("Escolha uma opção: ")
 
-def call_rpc(method, params, id=1):
+def callRpc(method, params, id):
     response = requests.post("http://localhost:5000", json={
         "jsonrpc": "2.0",
         "method": method,
@@ -26,22 +26,24 @@ while True:
         marca = input("Marca: ")
         modelo = input("Modelo: ")
         ano = int(input("Ano: "))
-        call_rpc("create_car", [marca, modelo, ano], 1)
+        callRpc("createCar", [marca, modelo, ano], 1)
     elif op == "2":
         _id = int(input("ID do carro: "))
-        call_rpc("read_car", [_id], 2)
+        callRpc("readCar", [_id], 2)
     elif op == "3":
         _id = int(input("ID do carro: "))
         marca = input("Nova marca (ou Enter p/ manter): ")
         modelo = input("Novo modelo (ou Enter p/ manter): ")
         ano = input("Novo ano (ou Enter p/ manter): ")
-        ano = int(ano)
-        call_rpc("update_car", [_id, marca, modelo, ano], 3)
+        ano_val = int(ano) if ano else None
+        marca_val = marca if marca else None
+        modelo_val = modelo if modelo else None
+        callRpc("updateCar", [_id, marca_val, modelo_val, ano_val], 3)
     elif op == "4":
         _id = int(input("ID do carro: "))
-        call_rpc("delete_car", [_id], 4)
+        callRpc("deleteCar", [_id], 4)
     elif op == "5":
-        call_rpc("list_cars", [], 5)
+        callRpc("listCars", [], 5)
     elif op == "0":
         print("Saindo...")
         break
